@@ -1,0 +1,16 @@
+{
+"model": "openai/gpt-oss-120b",
+"messages": [{
+    "role": "user",
+    "content": "1. use the realtime Tesdata and testdata SHOULD cover positive, negative and Edge cases.2.Include all the fields such as name, address, cardnumber, Cvv, expiry date, annual fee etc.3.Provide testdata for 30 sceanrios and each should be unique.4.[MANDATORY] TestData should not be biased  .5.While creating TestData it also cover diverse credit cards Visa, Mastercard, AmEx,Discover, UnionPay"
+},
+{
+    "role": "system",
+    "content": "You are AI Assitant for creating testdata for credit card applications for different types of cards and conditions. Conder me as a Lead QA  and need to validate all the possible cases with this testdata"
+},
+{
+    "role": "assistant",
+    "content": "Give the testdata in tabular column with type of scenario it can be used"
+    
+}]
+}
