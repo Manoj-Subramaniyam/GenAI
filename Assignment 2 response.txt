@@ -1,0 +1,33 @@
+{
+    "id": "chatcmpl-e23aa045-d589-424d-bcba-5d38cbf08eb7",
+    "object": "chat.completion",
+    "created": 1757509531,
+    "model": "openai/gpt-oss-120b",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "**Playwright (Node.js) – Converted version of the Selenium script**  \n\n```javascript\n/**\n * ------------------------------------------------------------\n *  Playwright script that:\n *   1️⃣ launches Chromium in **headless** mode\n *   2️⃣ logs into saucedemo.com\n *   3️⃣ clicks on the “Sauce Labs Backpack” product using JS evaluation\n *   4️⃣ extracts and prints the product price\n *   5️⃣ closes the browser\n *\n *  The code follows modern JavaScript (ES‑2024) conventions,\n *  uses async/await, proper naming, and full error handling.\n * ------------------------------------------------------------\n */\n\nimport { chromium } from 'playwright';   // Playwright library\n\n/**\n * Launches a headless Chromium browser, opens a new page and performs the login steps.\n * @returns {Promise<{browser: import('playwright').Browser, page: import('playwright').Page}>}\n */\nasync function launchBrowserAndLogin() {\n  // -------------------------------------------------------------------------\n  // 1️⃣ Browser launch (headless = true) + new context + new page\n  // -------------------------------------------------------------------------\n  const browser = await chromium.launch({ headless: true });\n  const context = await browser.newContext();           // isolated session\n  const page = await context.newPage();\n\n  // -------------------------------------------------------------------------\n  // 2️⃣ Navigate to the site and perform login\n  // -------------------------------------------------------------------------\n  await page.goto('https://www.saucedemo.com/', { waitUntil: 'domcontentloaded' });\n\n  // Fill username & password fields (selectors are identical to the Selenium version)\n  await page.fill('#user-name', 'visual_user');\n  await page.fill('#password', 'secret_sauce');\n\n  // Click the login button – the third input inside the login‑box\n  await page.click('(//div[@class=\"login-box\"]//input)[3]');\n\n  // -------------------------------------------------------------------------\n  // Return objects for later use\n  // -------------------------------------------------------------------------\n  return { browser, page };\n}\n\n/**\n * Main execution block – wrapped in try/catch to handle any runtime errors.\n */\n(async () => {\n  let browser; // will hold the browser instance for proper cleanup\n\n  try {\n    // -------------------------------------------------------------\n    // Launch browser & perform login\n    // -------------------------------------------------------------\n    const launchResult = await launchBrowserAndLogin();\n    browser = launchResult.browser;\n    const page = launchResult.page;\n\n    // -------------------------------------------------------------\n    // 3️⃣ Click on the \"Sauce Labs Backpack\" product using JS\n    // -------------------------------------------------------------\n    const backpackLocator = page.locator('//div[text()=\"Sauce Labs Backpack\"]');\n\n    // Ensure the element is attached to the DOM before executing JS\n    await backpackLocator.waitFor({ state: 'attached', timeout: 30_000 });\n\n    // Playwright's evaluate() runs code in the page context – equivalent to Selenium's JavascriptExecutor\n    await backpackLocator.evaluate((element) => element.click());\n\n    // -------------------------------------------------------------\n    // 4️⃣ Retrieve the price text and print it\n    // -------------------------------------------------------------\n    const priceLocator = page.locator('.inventory_details_price');\n    await priceLocator.waitFor({ state: 'visible', timeout: 30_000 });\n\n    const priceText = await priceLocator.textContent(); // e.g. \"$29.99\"\n    console.log(`Price of Backpack ${priceText?.trim()}`);\n\n  } catch (error) {\n    // -------------------------------------------------------------\n    // Centralised error handling – prints stack trace for debugging\n    // -------------------------------------------------------------\n    console.error('❌ An error occurred while executing the Playwright script:');\n    console.error(error);\n  } finally {\n    // -------------------------------------------------------------\n    // Graceful shutdown – ensure the browser is closed even on failure\n    // -------------------------------------------------------------\n    if (browser) {\n      await browser.close();\n    }\n  }\n})();\n```\n\n### How to run\n\n1. **Install Playwright (latest)**  \n\n   ```bash\n   npm init -y                # if you don't have a package.json yet\n   npm i -D playwright\n   npx playwright install     # pulls the browsers (Chromium, Firefox, WebKit)\n   ```\n\n2. **Save the script** (e.g., `sauceDemoTest.js`) and execute:\n\n   ```bash\n   node sauceDemoTest.js\n   ```\n\nThe script runs headlessly, logs in, clicks the backpack via JavaScript, prints its price, and exits cleanly—fully compatible with online Playwright test runners.",
+                "reasoning": "We need to produce Playwright JavaScript code per instructions.\n\nKey points:\n\n1. Use latest Node.js, JavaScript and Playwright.\n2. Proper comments.\n3. Import necessary libraries.\n4. Headless mode.\n5. Separate method for launching browser and login.\n6. Naming conventions.\n7. Try-catch exception handling.\n8. Runnable on online Playwright test compiler.\n\nWe'll create an async function launchBrowserAndLogin that returns page and browser context maybe. Use chromium with headless true. Use page.goto, page.fill, page.click. For clicking via JS executor equivalent we can use page.evaluate to click element.\n\nWe need to get price text via locator. Then console.log. Finally close browser.\n\nWrap main execution in try-catch and finally to close.\n\nAlso need to set default timeout maybe.\n\nWill import { chromium } from 'playwright';\n\nUse async IIFE.\n\nProvide comments.\n\nOk produce final answer."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "queue_time": 0.052894355,
+        "prompt_tokens": 445,
+        "prompt_time": 0.019121125,
+        "completion_tokens": 1114,
+        "completion_time": 2.274584605,
+        "total_tokens": 1559,
+        "total_time": 2.29370573
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_213abb2467",
+    "x_groq": {
+        "id": "req_01k4svpb4getvsbegej0vehnp7"
+    },
+    "service_tier": "on_demand"
+}
