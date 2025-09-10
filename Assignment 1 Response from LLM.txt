@@ -1,0 +1,58 @@
+// Importing Playwright test library
+const { chromium } = require('playwright');
+
+async function launchBrowser() {
+  let browser, context, page;
+  try {
+    // Launch browser in headless mode
+    browser = await chromium.launch({ headless: true });
+    context = await browser.newContext();
+    page = await context.newPage();
+  } catch (error) {
+    console.error('Error launching browser:', error);
+    throw error;
+  }
+  return { browser, page };
+}
+
+// Method to log in to SauceDemo
+async function loginToSauceDemo(page) {
+  try {
+    // Navigate to the URL
+    await page.goto('https://www.saucedemo.com/');
+
+    // Enter username
+    await page.fill('#user-name', 'visual_user');
+
+    // Enter password
+    await page.fill('#password', 'secret_sauce');
+
+    // Click login button
+    await page.click('(//div[@class="login-box"]//input)[3]');
+  } catch (error) {
+    console.error('Error during login:', error);
+    throw error;
+  }
+}
+
+(async () => {
+  const { browser, page } = await launchBrowser();
+
+  try {
+    await loginToSauceDemo(page);
+
+    // Click on "Sauce Labs Backpack" using JavaScript execution equivalent
+    const product = await page.locator('//div[text()="Sauce Labs Backpack"]');
+    await product.scrollIntoViewIfNeeded();
+    await product.click();
+
+    // Get the price of the backpack
+    const price = await page.locator('.inventory_details_price').innerText();
+    console.log(`Price of Backpack: ${price}`);
+  } catch (error) {
+    console.error('Error in test execution:', error);
+  } finally {
+    // Close the browser
+    await browser.close();
+  }
+})();
