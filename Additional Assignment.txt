@@ -1,0 +1,83 @@
+Context:
+You are an AI Assitant, you are provided with the Teams conversation and need to extracts only the action items
+instructions:
+	[Mandatory]ignore all the other conversation except action items
+	[Madatory] Highlight the important points
+	Use simple english 
+	[CRITICAL] Dont miss any points, as it lead to ESCALATAIONS
+	Ignore the conversation peopele name 
+Example:
+Example 1:
+Features: [10:01 AM] Sarah Johnson (Project Manager):
+Good morning, everyone. Let’s start with a quick status update.
+
+[10:02 AM] Alex Chen (Developer):
+Morning! The API integration is about 80% complete. We’re still testing edge cases, but it should be ready for QA by Friday.
+
+[10:03 AM] Maria Lopez (Designer):
+I’ve finished the new UI mockups for the dashboard. I’ll share them after the call for feedback.
+
+[10:05 AM] Sarah Johnson (Project Manager):
+Thanks, Maria. Could you also prepare a quick walkthrough for the stakeholders next week?
+
+[10:06 AM] Maria Lopez (Designer):
+Yes, absolutely.
+
+[10:08 AM] James Miller (QA Lead):
+Quick update from QA — we found two critical bugs in the last sprint. Both have fixes in progress, and we’ll retest tomorrow.
+
+[10:12 AM] Sarah Johnson (Project Manager):
+Perfect. Let’s aim to close them before Friday’s demo. Any blockers we should be aware of?
+
+[10:13 AM] Alex Chen (Developer):
+Nothing major, just waiting on the API keys from the client.
+
+[10:14 AM] Sarah Johnson (Project Manager):
+Got it. I’ll follow up with them today. Thanks, everyone!
+
+Meeting ended at 10:15 AM. 
+
+Example 2:
+Hey team, so good evening everybody. We are extensively working hard on a critical project. So, based on this grooming session happening today,
+ so whatever the conversations that we're going to have, that is going to be applicable for both development and testing team.Coming to the user stories perspective, 
+ get all your quesionsclarified in today's call from our PO and get your user stories completed at your earliest possible.
+ We are counting the story point as one (i.e This is not going to be a separate effort for dev & testing team). 
+ All stories should be closed both development and testing effor witin the capacity defined. Both efforts should goes in parallel.
+ Try to maximize all defects in the dev region before moving to testing environment, to ensure no defect has been leaked when we are moving to SIT phase. 
+ I'm expecting to see the progress of the development and testing progress end of each day, so in that way we can track and capture the bottleneck of the user stories.
+ We will take up the call based on the status. Team, please work extensively on weekdays and close all the activities.
+ Otherwise we may have to need support on weekends, which we really don't want to be happen. 
+
+output:
+	Bullet in points
+Persona:
+   consider me as a scrum master who need to share the minutes of the meeting across the team
+   
+   
+Response:
+
+Action Items from Meeting
+
+✅ Complete API integration and make it ready for QA by Friday.
+
+✅ Share the new UI mockups after the call for feedback.
+
+✅ Prepare a walkthrough for stakeholders next week.
+
+✅ Retest two critical bugs tomorrow and ensure they are closed before Friday’s demo.
+
+✅ Follow up with the client today to get API keys.
+
+✅ Clarify all questions with the PO today and complete user stories ASAP.
+
+✅ Close all user stories (Development + Testing) within defined capacity.
+
+✅ No separate story points for Dev & QA – efforts are combined.
+
+✅ Run Development and Testing in parallel to save time.
+
+✅ Fix all defects in the Dev environment first to avoid leakage in SIT.
+
+✅ Share daily progress updates for Dev & QA to track bottlenecks early.
+
+✅ Work extensively on weekdays to avoid weekend support needs.
