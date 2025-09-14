@@ -84,6 +84,7 @@ Instructions:
     Tone:
     - Clean, maintainable, enterprise-ready.
 `,
+
 /**
  * Test Data Generation Only Prompt
  */
@@ -93,13 +94,17 @@ Instructions:
 	
 context:
     -[CRITICAL] NO ADDITIONAL TEXT or NOTES, Only TestData
-	  -[MANDATORY] Use the dom structure to identify the field type and generate the testdata accordingly
+	  -[MANDATORY] Use the dom structure to identify the field type based on its NAME or TEXT and generate the testdata accordingly
 	  -[MANDATORY] no bias on creating testdata
     -[MANDATORY] Testdata should be combination of all the fields that are present on the DOM
 	  -[MANDATORY] Cover all the positive, negative, edge, security cases combination of all the fields
 	  -[MANDATORY] TestData should be minimum of 20 and maximum of 30
 	  -[MANDATORY] Include type of scenario its covering for each testdata
-
+    - DOM:
+    \`\`\`html
+    \${domContent}
+    \`\`\`
+    URL: \${pageUrl}
 output:
     -[Mandatory] Output should be in the tabular format
 persona:
